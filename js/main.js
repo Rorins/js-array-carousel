@@ -44,6 +44,8 @@ const textCollection = [
 const images = document.querySelector(".images")
 /* Richiamo classe images creando una sua variabile*/
 const thumbs = document.querySelector(".thumbs")
+/* credo variable per l'immagine attiva che partirà da 1*/
+let activeImage = 1;
 
 /*Genero il contenuto di images usando un loop che andrà a prendere le immagini dalla relativa lista*/
 for (let i = 0; i<imageCollection.length; i++){
@@ -61,3 +63,25 @@ thumbs.innerHTML += `<div class="thumb active">
 </div>`
 }
 
+/*Immagine  attiva*/
+document.getElementsByClassName("image-container")[activeImage].classList.add("active")
+/*Immagine  attiva*/
+document.getElementsByClassName("thumb")[activeImage].classList.add("active")
+
+/* passaggio di immagine*/
+const next= document.querySelector(".next")
+
+next.addEventListener("click", function(){
+    /*incremento di active image e thumbnail e reset con impostazione immagine successiva*/
+    if(activeImage === imageCollection.length-1){
+        activeImage = 0;
+    }else{
+        activeImage++;
+    }
+    document.querySelector(".image-container.active").classList.remove("active")
+    document.getElementsByClassName("image-container")[activeImage].classList.add("active")
+
+    document.querySelector(".thumb.active").classList.remove("active")
+    document.getElementsByClassName("thumb")[activeImage].classList.add("active")
+    
+})
